@@ -18,9 +18,9 @@ import sys
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(REPO_ROOT, "data", "delivery_records.csv")
-OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "delivery_records_cleaned.csv")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(SCRIPT_DIR, "delivery_records.csv")
+OUTPUT_PATH = os.path.join(SCRIPT_DIR, "delivery_records_cleaned.csv")
 
 ZONE_MAPPING = {
     "N. Zone 1": "North Zone 1",
@@ -32,7 +32,7 @@ ZONE_MAPPING = {
 
 def load_raw_data() -> pd.DataFrame:
     if not os.path.exists(DATA_PATH):
-        sys.exit("data/delivery_records.csv not found. Run `python data/generate_data.py` first.")
+        sys.exit("delivery_records.csv not found in this folder. Run generate_data.py first.")
     return pd.read_csv(DATA_PATH, parse_dates=[
         "dispatch_time", "delivered_time", "promised_window_start", "promised_window_end"
     ])
